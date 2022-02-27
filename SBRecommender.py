@@ -29,10 +29,6 @@ def label_changer(label: str):
 
 
 def preprocess_data(df):
-    # detecting train and test data
-    val = 0
-    if(df.shape[1] > 24):
-        val = 1
     # dropping this two columns as they contain all NaN values
     df = df.drop(columns=['ult_fec_cli_1t', 'conyuemp'])
     # preprocessing for renta
@@ -51,21 +47,9 @@ def preprocess_data(df):
     df['ind_nuevo'] = df['ind_nuevo'].astype('int')
     df['ind_actividad_cliente'] = df['ind_actividad_cliente'].astype(
         'int')
-    if(val == 1):
-        df['ind_nomina_ult1'] = df['ind_nomina_ult1'].astype('int')
-        df['ind_nom_pens_ult1'] = df['ind_nom_pens_ult1'].astype(
-            'int')
     df['indrel_1mes'] = df['indrel_1mes'].replace(
         {"1.0": "1", "2.0": "2", "3.0": "3", "4.0": "4"})
-    # changing all labels data into string
-    if(val == 1):
-        for col_name in (df.loc[:, "ind_ahor_fin_ult1":]).columns:
-            df[col_name] = df[col_name].astype(str)
-        df['labels'] = (df.iloc[:, 22:]).values.sum(axis=1)
     clean_data = df.iloc[:, :22]
-    if(val == 1):
-        clean_data.insert(len(clean_data.columns),
-                          "labels", df["labels"].values)
     return clean_data
 
 
