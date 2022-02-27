@@ -49,8 +49,7 @@ def preprocess_data(df):
         'int')
     df['indrel_1mes'] = df['indrel_1mes'].replace(
         {"1.0": "1", "2.0": "2", "3.0": "3", "4.0": "4"})
-    clean_data = df.iloc[:, :22]
-    return clean_data
+    return df
 
 
 def run():
