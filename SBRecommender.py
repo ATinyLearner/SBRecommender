@@ -139,7 +139,7 @@ def run():
             pred_results["Label"] = Recommendations
             pred_results.rename(
                 columns={"Label": "Recommendations"}, inplace=True)
-            st.write(pred_results)
+            st.write(pred_results[["ncodpers", "Recommendations"]])
 
 
 run()
