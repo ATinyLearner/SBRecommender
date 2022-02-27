@@ -1,6 +1,6 @@
 # All imports
 import datetime
-from pycaret.classification import load_model,predict_model
+from pycaret.classification import load_model, predict_model
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -70,6 +70,7 @@ def preprocess_data(df):
 
 
 def run():
+    # creating sidebar with a select box
     add_selectbox = st.sidebar.selectbox(
         "How do you want to predict?", ("Single", "Batch"))
     st.sidebar.info(
@@ -77,6 +78,7 @@ def run():
     st.sidebar.success("Hello There!")
 
     st.title("SBRecommender")
+    # creating widgets for single pediction page
     if (add_selectbox == "Single"):
         ind_empleado = st.selectbox("Employee Index", options=[
                                     "A", "B", "F", "N", "P"])
@@ -138,6 +140,7 @@ def run():
             result = label_changer(output)
             st.write(f"Recommended product/products : {result}")
 
+    # creating widgets for batch prediction page
     if(add_selectbox == "Batch"):
         file_upload = st.file_uploader(
             "Upload your csv file for recommendations", type=["csv"])
