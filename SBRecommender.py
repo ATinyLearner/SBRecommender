@@ -126,7 +126,7 @@ def run():
     # creating widgets for batch prediction page
     if(add_selectbox == "Batch"):
         file_upload = st.file_uploader(
-            "Upload your csv file for recommendations", type=["csv"])
+            type=["csv"], label="Upload your csv file for recommendations")
         if(file_upload is not None):
             data = pd.read_csv(file_upload)
             final_df = preprocess_data(data)
