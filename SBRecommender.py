@@ -4,6 +4,8 @@ from pycaret.classification import load_model, predict_model
 import streamlit as st
 import pandas as pd
 import numpy as np
+import plotly.express as px
+
 
 # loading model
 model = load_model("FM")
@@ -28,6 +30,7 @@ def label_changer(label: str):
     return result
 
 
+@st.cache
 def preprocess_data(df):
     # dropping this two columns as they contain all NaN values
     df = df.drop(columns=['ult_fec_cli_1t', 'conyuemp'])
@@ -50,6 +53,13 @@ def preprocess_data(df):
     df['indrel_1mes'] = df['indrel_1mes'].replace(
         {"1.0": "1", "2.0": "2", "3.0": "3", "4.0": "4"})
     return df
+
+
+# function to load csv data for test
+@st.cache
+def load_test_data(csv_data):
+    data = pd.read_csv(csv_data)
+    return data
 
 
 def run():
@@ -121,14 +131,14 @@ def run():
             input_df = pd.DataFrame([input_dict])
             output = predict(model=model, input_data=input_df)
             result = label_changer(output)
-            st.write(f"Recommended product/products : {result}")
+            st.metric(label="Recommended product", value=result)
 
     # creating widgets for batch prediction page
     if(add_selectbox == "Batch"):
         file_upload = st.file_uploader(
             type=["csv"], label="Upload your csv file for recommendations")
         if(file_upload is not None):
-            data = pd.read_csv(file_upload)
+            data = load_test_data(file_upload)
             final_df = preprocess_data(data)
             pred_results = predict_model(estimator=model, data=final_df)
             encode_dict = {}
