@@ -16,3 +16,4 @@ A recommender app to recommend banking products
 <h4>1) First Click on the click me link <br> 2) App page will open select Single or Batch from left side select box <br> 3) After selecting Single , provide necessary data for prectdion <br> 4) Click on predict button <br>  5) For Batch prediction just upload the csv file , it will be better if file is under 100 MB
 <br>
 <h3>In Both cases you will be greated with result. Thanks for checking out my recommendation application
+<br> You can check this article in medium by <a href="https://medium.com/@avikghosh_55327/from-creation-to-deployment-of-ml-models-in-most-easiest-way-with-case-study-a23bc171ee0c"> clicking here</a>
