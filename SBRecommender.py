@@ -30,7 +30,6 @@ def label_changer(label: str):
     return result
 
 
-@st.cache
 def preprocess_data(df):
     # dropping this two columns as they contain all NaN values
     df = df.drop(columns=['ult_fec_cli_1t', 'conyuemp'])
@@ -56,7 +55,6 @@ def preprocess_data(df):
 
 
 # function to load csv data for test
-@st.cache
 def load_test_data(csv_data):
     data = pd.read_csv(csv_data)
     return data
