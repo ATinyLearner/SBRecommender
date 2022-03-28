@@ -4,7 +4,6 @@ from pycaret.classification import load_model, predict_model
 import streamlit as st
 import pandas as pd
 import numpy as np
-import plotly.express as px
 
 
 # loading model
@@ -12,7 +11,7 @@ model = load_model("FM")
 
 
 # function to predict results
-def predict(model, input_data):
+def predict_all(model, input_data):
     pred_df = predict_model(estimator=model, data=input_data)
     preds = pred_df['Label'][0]
     return preds
@@ -127,7 +126,7 @@ def run():
                           'tipodom': tipodom, 'cod_prov': cod_prov, 'nomprov': nomprov, 'ind_actividad_cliente': ind_actividad_cliente, 'renta': renta,
                           'segmento': segmento}
             input_df = pd.DataFrame([input_dict])
-            output = predict(model=model, input_data=input_df)
+            output = predict_all(model=model, input_data=input_df)
             result = label_changer(output)
             st.metric(label="Recommended product", value=result)
 
